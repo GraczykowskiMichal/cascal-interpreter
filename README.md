@@ -1,4 +1,4 @@
-# Cascal grammer and interpreter
+# Cascal grammar and interpreter
 
 I am the author of the files: grammar/Cascal.cf, interpreter/Analyzer.hs, interpreter/Executor.hs, interpreter/interpreter.hs, Makefile.
 
