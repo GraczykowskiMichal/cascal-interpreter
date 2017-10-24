@@ -1,0 +1,97 @@
+Pr.		Program ::= [Instr] ;
+
+
+RegularI.	Instr ::= Stm ;
+ProcDefI.	Instr ::= ProcDef ;
+[]. 		[Instr] ::= ;
+(:). 		[Instr] ::= Instr ";" [Instr] ;
+
+
+ExprS.		Stm   ::= Exp ;
+DeclS.		Stm   ::= Decl ;
+AssignS.	Stm   ::= Assign ;
+IfS.		Stm   ::= If ;
+LoopS.		Stm	  ::= Loop ;
+PrCallS.	Stm   ::= PrCall ;
+PrintS. 	Stm   ::= PrintVal ;
+[]. 		[Stm] ::= ;
+(:). 		[Stm] ::= Stm ";" [Stm] ;
+
+
+TInt.		TypeSpecifier ::= "int" ;
+TBool. 		TypeSpecifier ::= "bool" ;
+TString. 	TypeSpecifier ::= "string" ;
+
+
+EOr.				Exp  ::= Exp "||" Exp1 ;
+EAnd.				Exp1 ::= Exp1 "&&" Exp2 ;
+EEqual.				Exp2 ::= Exp2 "==" Exp3 ;
+ENotEqual.			Exp2 ::= Exp2 "!=" Exp3 ;
+ELess.				Exp3 ::= Exp3 "<" Exp4 ;
+EGreater.			Exp3 ::= Exp3 ">" Exp4 ;
+ELessOrEqual.		Exp3 ::= Exp3 "<=" Exp4 ;
+EGreaterOrEqual.	Exp3 ::= Exp3 ">=" Exp4 ;
+EAdd.       		Exp5 ::= Exp5 "+" Exp6 ;
+ESub.      			Exp5 ::= Exp5 "-" Exp6 ;
+EMul.      			Exp6 ::= Exp6 "*" Exp7 ;
+EDiv.        		Exp6 ::= Exp6 "/" Exp7 ;
+EVar.				Exp7 ::= Ident ;
+EInt.				Exp7 ::= Integer ;
+EString.			Exp7 ::= String ;
+EBool.				Exp7 ::= BoolConst ;
+ECast.				Exp7 ::= Cast ;
+
+BoolTrue.	BoolConst ::= "true" ;
+BoolFalse. 	BoolConst ::= "false" ;
+
+_.	Exp  ::= Exp1 ;
+_. 	Exp1 ::= Exp2 ;
+_. 	Exp2 ::= Exp3 ;
+_. 	Exp3 ::= Exp4 ;
+_. 	Exp4 ::= Exp5 ;
+_. 	Exp5 ::= Exp6 ;
+_. 	Exp6 ::= Exp7 ;
+_. 	Exp7 ::= "(" Exp ")" ;
+
+
+VarDecl.	Decl ::= TypeSpecifier Ident ":=" Exp ;
+
+
+VarAssign.	Assign ::= Ident "=" Exp ;
+
+
+IfWithoutElse.	If ::= "if" Exp "then" [Stm] "endif" ;
+IfWithElse.		If ::= "if" Exp "then" [Stm] "else" [Stm] "endif" ;
+
+
+WhileLoop.	Loop ::= "while" Exp "do" [Stm] "endwhile" ;
+
+
+ForLoop.			Loop      ::= "for" ForAssign ForAction Exp "do" [Stm] "endfor" ;
+ForAssignExp.		ForAssign ::= Ident ":=" Exp ;
+ForActionTo.		ForAction ::= "to" ;
+ForActionDownto.	ForAction ::= "downto" ;
+
+
+PrDef.				    ProcDef 	::= "proc" Ident "(" ArgsDef ")" "do" [Stm] "endproc" ;
+
+NoArgsDef.				ArgsDef     ::= ;
+SingleArgDef.			ArgsDef 	::= TypeSpecifier Ident ;
+MultipleArgsDef.		ArgsDef 	::= ArgsDef "," TypeSpecifier Ident ;
+
+
+ProcCall.				PrCall 	 ::= Ident "(" ArgsCall ")" ;
+
+ProcNoArgsCall.			ArgsCall ::= ;
+ProcSingleArgCall.		ArgsCall ::= Exp ;
+ProcMultipleArgsCall.	ArgsCall ::= ArgsCall "," Exp ;
+
+
+IntToString.	Cast ::= "intToString" "(" Exp ")" ;
+StringToInt.	Cast ::= "stringToInt" "(" Exp ")" ;
+
+
+PrintInstr.		PrintVal ::= "print" "(" Exp ")" ;
+
+
+comment "//";
